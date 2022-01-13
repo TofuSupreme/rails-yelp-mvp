@@ -13,8 +13,13 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
-    redirect_to restaurant(@restaurant)
+    if @restaurant.save
+      redirect_to restaurant_url(@restaurant)
+    else
+      render :new
+    end
   end
+
   private
 
   def restaurant_params
